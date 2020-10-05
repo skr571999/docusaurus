@@ -22,7 +22,7 @@ import {
 
 import {DEFAULT_PLUGIN_ID} from '@docusaurus/core/lib/constants';
 import {LoadContext} from '@docusaurus/types';
-import {normalizeUrl} from '@docusaurus/utils';
+import {normalizeUrl, posixPath} from '@docusaurus/utils';
 import {difference} from 'lodash';
 import chalk from 'chalk';
 
@@ -39,21 +39,24 @@ export function getVersionedDocsDirPath(
   siteDir: string,
   pluginId: string,
 ): string {
-  return path.join(siteDir, addPluginIdPrefix(VERSIONED_DOCS_DIR, pluginId));
+  return posixPath(
+    path.join(siteDir, addPluginIdPrefix(VERSIONED_DOCS_DIR, pluginId)),
+  );
 }
 
 export function getVersionedSidebarsDirPath(
   siteDir: string,
   pluginId: string,
 ): string {
-  return path.join(
-    siteDir,
-    addPluginIdPrefix(VERSIONED_SIDEBARS_DIR, pluginId),
+  return posixPath(
+    path.join(siteDir, addPluginIdPrefix(VERSIONED_SIDEBARS_DIR, pluginId)),
   );
 }
 
 export function getVersionsFilePath(siteDir: string, pluginId: string): string {
-  return path.join(siteDir, addPluginIdPrefix(VERSIONS_JSON_FILE, pluginId));
+  return posixPath(
+    path.join(siteDir, addPluginIdPrefix(VERSIONS_JSON_FILE, pluginId)),
+  );
 }
 
 function ensureValidVersionString(version: unknown): asserts version is string {
@@ -220,7 +223,9 @@ function checkVersionMetadataPaths({
 }: VersionMetadata) {
   if (!fs.existsSync(docsDirPath)) {
     throw new Error(
-      `The docs folder does not exist for version [${versionName}]. A docs folder is expected to be found at ${docsDirPath}`,
+      `The docs folder does not exist for version [${versionName}]. A docs folder is expected to be found at ${posixPath(
+        docsDirPath,
+      )}`,
     );
   }
 

@@ -17,6 +17,7 @@ import {
   normalizeUrl,
   aliasedSitePath,
   getEditUrl,
+  posixPath,
 } from '@docusaurus/utils';
 import {LoadContext} from '@docusaurus/types';
 
@@ -163,7 +164,7 @@ export async function generateBlogPosts(
         metadata: {
           permalink: normalizeUrl([baseUrl, routeBasePath, slug]),
           editUrl: editBlogUrl,
-          source: aliasedSource,
+          source: posixPath(aliasedSource),
           description: frontMatter.description || excerpt,
           date,
           tags: frontMatter.tags,
@@ -206,10 +207,9 @@ export function linkify(
 
     while (mdMatch !== null) {
       const mdLink = mdMatch[1];
-      const aliasedPostSource = `@site/${path.relative(
-        siteDir,
-        path.resolve(blogPath, mdLink),
-      )}`;
+      const aliasedPostSource = posixPath(
+        `@site/${path.relative(siteDir, path.resolve(blogPath, mdLink))}`,
+      );
       let blogPostPermalink = null;
 
       blogPosts.forEach((blogPost) => {

@@ -9,6 +9,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import {linkify} from '../blogUtils';
 import {BlogPost} from '../types';
+import {posixPath} from '@docusaurus/utils';
 
 const sitePath = path.join(__dirname, '__fixtures__', 'website');
 const blogPath = path.join(sitePath, 'blog-with-ref');
@@ -18,10 +19,12 @@ const blogPosts: BlogPost[] = [
     id: 'Happy 1st Birthday Slash!',
     metadata: {
       permalink: '/blog/2018/12/14/Happy-First-Birthday-Slash',
-      source: path.join(
-        '@site',
-        pluginDir,
-        '2018-12-14-Happy-First-Birthday-Slash.md',
+      source: posixPath(
+        path.join(
+          '@site',
+          pluginDir,
+          '2018-12-14-Happy-First-Birthday-Slash.md',
+        ),
       ),
       title: 'Happy 1st Birthday Slash!',
       description: `pattern name`,

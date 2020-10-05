@@ -236,10 +236,12 @@ describe('simple website', () => {
         permalink: '/docs/foo/bazSlug.html',
       },
       sidebar: 'docs',
-      source: path.join(
-        '@site',
-        path.relative(siteDir, currentVersion.docsDirPath),
-        'hello.md',
+      source: posixPath(
+        path.join(
+          '@site',
+          path.relative(siteDir, currentVersion.docsDirPath),
+          'hello.md',
+        ),
       ),
       title: 'Hello, World !',
       description: 'Hi, Endilie here :)',
@@ -258,11 +260,13 @@ describe('simple website', () => {
       permalink: '/docs/foo/bar',
       slug: '/foo/bar',
       sidebar: 'docs',
-      source: path.join(
-        '@site',
-        path.relative(siteDir, currentVersion.docsDirPath),
-        'foo',
-        'bar.md',
+      source: posixPath(
+        path.join(
+          '@site',
+          path.relative(siteDir, currentVersion.docsDirPath),
+          'foo',
+          'bar.md',
+        ),
       ),
       title: 'Bar',
       description: 'This is custom description',

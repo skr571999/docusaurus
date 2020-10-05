@@ -7,6 +7,7 @@
 
 import path from 'path';
 import {resolve} from 'url';
+import {posixPath} from '@docusaurus/utils';
 import {
   DocsMarkdownOption,
   VersionMetadata,
@@ -55,7 +56,7 @@ function replaceMarkdownLinks(
       const mdLink = mdMatch[1];
       const targetSource = `${docsDirPath}/${mdLink}`;
       const aliasedSource = (source: string) =>
-        `@site/${path.relative(siteDir, source)}`;
+        posixPath(`@site/${path.relative(siteDir, source)}`);
       const permalink =
         sourceToPermalink[aliasedSource(resolve(filePath, mdLink))] ||
         sourceToPermalink[aliasedSource(targetSource)];

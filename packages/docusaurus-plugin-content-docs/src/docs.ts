@@ -12,6 +12,7 @@ import {
   normalizeUrl,
   getEditUrl,
   parseMarkdownString,
+  posixPath,
 } from '@docusaurus/utils';
 import {LoadContext} from '@docusaurus/types';
 
@@ -171,7 +172,7 @@ export function processDocMetadata({
     isDocsHomePage,
     title,
     description,
-    source: aliasedSitePath(filePath, siteDir),
+    source: posixPath(aliasedSitePath(filePath, siteDir)),
     slug: docSlug,
     permalink,
     editUrl: custom_edit_url !== undefined ? custom_edit_url : docsEditUrl,
