@@ -29,8 +29,8 @@ const processFixture = async (name, options) => {
  * E.g: ../package/doc -> package/doc
  */
 function cleanPath(filePath) {
-  if (filePath.startsWith('../')) {
-    return filePath.replace('../', '');
+  if (filePath.startsWith('..\\')) {
+    return filePath.replace('..\\', '');
   } else {
     return filePath;
   }
