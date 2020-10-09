@@ -25,7 +25,11 @@ const processFixture = async (name, options) => {
 };
 
 // avoid hardcoding absolute
-const staticDir = `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`;
+const staticDir = join(
+  `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
+);
+console.log('11111');
+console.log('AAAA', staticDir);
 
 describe('transformImage plugin', () => {
   test('fail if image does not exist', async () => {
