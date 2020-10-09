@@ -12,33 +12,36 @@ import vfile from 'to-vfile';
 import plugin from '../index';
 import slug from '../../slug/index';
 
-const processFixture = async (name, options) => {
-  const path = join(__dirname, 'fixtures', `${name}.md`);
-  const file = await vfile.read(path);
-  const result = await remark()
-    .use(slug)
-    .use(mdx)
-    .use(plugin, {...options, filePath: path})
-    .process(file);
-
-  return result.toString();
-};
-
 /**
  * Revove replace the starting "../" with "".
  * E.g: ../package/doc -> package/doc
  */
 function cleanPath(filePath) {
-  if (filePath.startsWith('..\\')) {
-    return filePath.replace('..\\', '');
+  if (filePath.startsWith('../')) {
+    return filePath.replace('../', '');
   } else {
     return filePath;
   }
 }
 
+const processFixture = async (name, options) => {
+  const path = join(__dirname, 'fixtures', `${name}.md`);
+  console.log('PATH', path);
+  const file = await vfile.read(path);
+  console.log('FILE', file);
+  const result = await remark()
+    .use(slug)
+    .use(mdx)
+    .use(plugin, {...options, filePath: cleanPath(path)})
+    .process(file);
+
+  console.log('RESULT : ', result);
+  return result.toString();
+};
+
 // avoid hardcoding absolute
-const staticDir = cleanPath(
-  join(`./${relative(process.cwd(), join(__dirname, 'fixtures'))}`),
+const staticDir = join(
+  `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
 );
 
 console.log('111111');
