@@ -7,9 +7,9 @@ on:
     branches:
       # - master
       - testbugfix
-  # pull_request:
-  #   branches:
-  #     - master
+  pull_request:
+    branches:
+      - testbugfixpr
 
 jobs:
   build:
