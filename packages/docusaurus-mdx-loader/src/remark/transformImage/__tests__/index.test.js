@@ -24,10 +24,23 @@ const processFixture = async (name, options) => {
   return result.toString();
 };
 
+/**
+ * Revove replace the starting "../" with "".
+ * E.g: ../package/doc -> package/doc
+ */
+function cleanPath(filePath) {
+  if (filePath.startsWith('../')) {
+    return filePath.replace('../', '');
+  } else {
+    return filePath;
+  }
+}
+
 // avoid hardcoding absolute
-const staticDir = join(
-  `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
+const staticDir = cleanPath(
+  join(`./${relative(process.cwd(), join(__dirname, 'fixtures'))}`),
 );
+
 console.log('111111');
 console.log('AAAA', staticDir);
 
@@ -51,6 +64,9 @@ describe('transformImage plugin', () => {
     const result = await processFixture('img', {
       staticDir,
     });
+
+    console.log('RESULT', result);
+
     expect(result).toMatchSnapshot();
   });
 
