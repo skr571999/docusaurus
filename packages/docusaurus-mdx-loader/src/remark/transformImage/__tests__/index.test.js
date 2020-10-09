@@ -28,7 +28,7 @@ const processFixture = async (name, options) => {
 const staticDir = join(
   `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
 );
-console.log('11111');
+console.log('111111');
 console.log('AAAA', staticDir);
 
 describe('transformImage plugin', () => {
