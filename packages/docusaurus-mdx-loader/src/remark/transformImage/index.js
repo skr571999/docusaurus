@@ -110,6 +110,7 @@ async function processImageNode(node, {filePath, staticDir}) {
 }
 
 const plugin = (options) => {
+  console.log('Options : ', options);
   const transformer = async (root) => {
     const promises = [];
     visit(root, 'image', (node) => {

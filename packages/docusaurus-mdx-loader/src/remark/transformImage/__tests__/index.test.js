@@ -44,6 +44,14 @@ const staticDir = join(
   `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
 );
 
+console.log('CWD : ', process.cwd());
+console.log('DIRNAME : ', __dirname);
+console.log('JOIN : ', join(__dirname, 'fixtures'));
+console.log(
+  'RELATIVE : ',
+  `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
+);
+
 console.log('111111');
 console.log('AAAA', staticDir);
 
