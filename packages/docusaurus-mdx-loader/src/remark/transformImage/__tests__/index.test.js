@@ -17,8 +17,8 @@ import slug from '../../slug/index';
  * E.g: ../package/doc -> package/doc
  */
 function cleanPath(filePath) {
-  if (filePath.startsWith('../')) {
-    return filePath.replace('../', '');
+  if (filePath.startsWith('..\\')) {
+    return filePath.replace('..\\', '');
   } else {
     return filePath;
   }
@@ -40,8 +40,8 @@ const processFixture = async (name, options) => {
 };
 
 // avoid hardcoding absolute
-const staticDir = join(
-  `./${relative(process.cwd(), join(__dirname, 'fixtures'))}`,
+const staticDir = cleanPath(
+  join(`./${relative(process.cwd(), join(__dirname, 'fixtures'))}`),
 );
 
 console.log('CWD : ', process.cwd());
