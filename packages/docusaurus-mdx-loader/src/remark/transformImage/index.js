@@ -50,11 +50,16 @@ function cleanPath(filePath) {
 // Needed to throw errors with computer-agnostic path messages
 // Absolute paths are too dependant of user FS
 function toRelativePath(filePath) {
+  console.log('filePath', filePath);
+  console.log('CWD', process.cwd());
   return cleanPath(posixPath(path.relative(process.cwd(), filePath)));
 }
 
 async function ensureImageFileExist(imagePath, sourceFilePath) {
+  console.log('Imagepath : ', imagePath);
+  console.log('SourceFilePath : ', sourceFilePath);
   const imageExists = await fs.exists(imagePath);
+  console.log('Image Exists : ', imageExists);
   if (!imageExists) {
     throw new Error(
       `Image ${toRelativePath(imagePath)} used in ${toRelativePath(
@@ -65,6 +70,10 @@ async function ensureImageFileExist(imagePath, sourceFilePath) {
 }
 
 async function processImageNode(node, {filePath, staticDir}) {
+  console.log('123456');
+  console.log('Node : ', node);
+  console.log('FilePath : ', filePath);
+  console.log('StaticDir : ', staticDir);
   if (!node.url) {
     throw new Error(
       `Markdown image url is mandatory. filePath=${toRelativePath(filePath)}`,
